@@ -6,7 +6,7 @@ function Home() {
   return (
     <section>
       <h2>Recently Added</h2>
-      <ArticlesList />
+      <ArticlesList limit="5" />
       <button>
         <Link to="/articles">See more articles....</Link>
       </button>

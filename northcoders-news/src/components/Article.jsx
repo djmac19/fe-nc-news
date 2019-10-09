@@ -5,7 +5,6 @@ class Article extends Component {
   state = { article: null, isLoading: true };
 
   componentDidMount() {
-    console.log("mounting");
     const { article_id } = this.props;
     api.getArticle(article_id).then(article => {
       this.setState({ article, isLoading: false });
@@ -15,7 +14,6 @@ class Article extends Component {
   render() {
     const { isLoading } = this.state;
     if (isLoading) {
-      console.log("in if statement");
       return <p>loading...</p>;
     } else {
       const { title, author, body, created_at } = this.state.article;

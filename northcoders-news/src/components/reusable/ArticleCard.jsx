@@ -4,13 +4,13 @@ import { Link } from "@reach/router";
 function ArticleCard({ article_id, title, votes, created_at }) {
   const date = new Date(created_at);
   return (
-    <ul key={article_id}>
-      <li>
+    <section>
+      <h1>
         <Link to={`/articles/${article_id}`}>{title}</Link>
-      </li>
-      <li>Votes: {votes}</li>
-      <li>Created At: {date.toDateString()}</li>
-    </ul>
+      </h1>
+      <p>Votes: {votes}</p>
+      <p>Created At: {date.toDateString()}</p>
+    </section>
   );
 }
 

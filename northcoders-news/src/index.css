@@ -3,10 +3,6 @@ nav {
   justify-content: space-evenly;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .FlexRow {
   display: flex;
 }
