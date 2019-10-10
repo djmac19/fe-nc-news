@@ -1,10 +1,19 @@
 import React from "react";
 
-function Page({ updateQueries }) {
+function Page({ changePage }) {
+  const handleClick = event => {
+    console.log("in handleClick");
+    const { value } = event.target;
+    changePage(value);
+  };
   return (
     <section>
-      <button>Prev Page</button>
-      <button> Next Page </button>
+      <button value="-1" onClick={handleClick}>
+        Prev Page
+      </button>
+      <button value="1" onClick={handleClick}>
+        Next Page
+      </button>
     </section>
   );
 }

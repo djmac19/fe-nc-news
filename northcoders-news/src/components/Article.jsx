@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import * as api from "../utils/api";
 
 class Article extends Component {
@@ -6,7 +7,7 @@ class Article extends Component {
 
   componentDidMount() {
     const { article_id } = this.props;
-    api.getArticle(article_id).then(article => {
+    api.getArticle(article_id).then(({ article }) => {
       this.setState({ article, isLoading: false });
     });
   }
@@ -17,12 +18,15 @@ class Article extends Component {
       return <p>loading...</p>;
     } else {
       const { title, author, body, created_at } = this.state.article;
+      const date = new Date(created_at);
       return (
         <section>
           <h3>{title}</h3>
-          <p>{author}</p>
+          <p>
+            by <Link to={`/articles/users/${author}`}>{author}</Link>
+          </p>
           <p>{body}</p>
-          <p>{created_at}</p>
+          <p>Created: {date.toDateString()}</p>
         </section>
       );
     }

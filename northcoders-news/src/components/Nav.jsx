@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { Link } from "@reach/router";
+import styles from "../styling/Nav.module.css";
 
 class Nav extends Component {
   state = { topics: null };
@@ -12,7 +13,7 @@ class Nav extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <nav>
+      <nav className={styles.navbar}>
         <h3 key="home">
           <Link to="/">HOME</Link>
         </h3>

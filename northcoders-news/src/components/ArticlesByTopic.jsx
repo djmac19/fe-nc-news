@@ -12,7 +12,7 @@ class ArticlesByTopic extends Component {
       author: null,
       topic: this.props.slug,
       limit: null,
-      p: null
+      p: 1
     }
   };
 
@@ -20,6 +20,16 @@ class ArticlesByTopic extends Component {
     this.setState(currState => {
       const newState = { ...currState };
       return { queries: { ...newState.queries, [key]: value } };
+    });
+  };
+
+  changePage = value => {
+    console.log("in changePage");
+    this.setState(currState => {
+      const newState = { ...currState };
+      return {
+        queries: { ...newState.queries, p: newState.queries.p + value }
+      };
     });
   };
 
@@ -39,7 +49,7 @@ class ArticlesByTopic extends Component {
         <Queries updateQueries={this.updateQueries} />
         <section>
           <ArticlesList {...this.state.queries} />
-          <Page updateQueries={this.updateQueries} />
+          <Page changePage={this.changePage} />
         </section>
       </section>
     );

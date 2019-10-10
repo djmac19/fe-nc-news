@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-function ArticleCard({ article_id, title, author, votes, created_at }) {
+function Comment({ body, author, created_at, votes }) {
   const date = new Date(created_at);
   return (
     <section>
       <h3>
-        <Link to={`/articles/${article_id}`}>{title}</Link>
+        <Link to="/articles/users/:username">{author}</Link>
       </h3>
-      <p>
-        by <Link to={`/articles/users/${author}`}>{author}</Link>
-      </p>
+      <p>{body}</p>
       <p>Votes: {votes}</p>
       <p>Created At: {date.toDateString()}</p>
     </section>
   );
 }
 
-export default ArticleCard;
+export default Comment;

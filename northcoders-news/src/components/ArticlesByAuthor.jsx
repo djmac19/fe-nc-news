@@ -4,12 +4,12 @@ import Queries from "./queries/Queries";
 import ArticlesList from "./reusable/ArticlesList";
 import Page from "./Page";
 
-class AllArticles extends Component {
+class ArticlesByAuthor extends Component {
   state = {
     queries: {
       sort_by: null,
       order: null,
-      author: null,
+      author: this.props.username,
       topic: null,
       limit: null,
       p: 1
@@ -24,6 +24,7 @@ class AllArticles extends Component {
   };
 
   changePage = value => {
+    console.log("in changePage");
     this.setState(currState => {
       const newState = { ...currState };
       return {
@@ -31,6 +32,18 @@ class AllArticles extends Component {
       };
     });
   };
+
+  componentDidUpdate(prevProps) {
+    const authorChanged = prevProps.username !== this.props.username;
+    if (authorChanged) {
+      this.setState(currState => {
+        const newState = { ...currState };
+        return {
+          queries: { ...newState.queries, author: this.props.username }
+        };
+      });
+    }
+  }
 
   render() {
     return (
@@ -45,4 +58,4 @@ class AllArticles extends Component {
   }
 }
 
-export default AllArticles;
+export default ArticlesByAuthor;

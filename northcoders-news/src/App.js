@@ -6,7 +6,8 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import AllArticles from "./components/AllArticles";
 import ArticlesByTopic from "./components/ArticlesByTopic";
-// import SingleArticle from "./components/SingleArticle";
+import ArticlesByAuthor from "./components/ArticlesByAuthor";
+import SingleArticle from "./components/SingleArticle";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Home path="/" />
         <AllArticles path="/articles" />
         <ArticlesByTopic path="/articles/topics/:slug" />
-        {/* <SingleArticle path="/articles/:article_id/*" /> */}
+        <ArticlesByAuthor path="/articles/users/:username" />
+        <SingleArticle path="/articles/:article_id/*" />
       </Router>
     </div>
   );

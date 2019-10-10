@@ -9,7 +9,7 @@ function SortBy({ updateQueries }) {
     <form>
       <h4>Sort By:</h4>
       <select onClick={handleClick}>
-        <option value="created_at">Date</option>
+        <option value="created_at">Created</option>
         <option value="votes">Votes</option>
       </select>
     </form>

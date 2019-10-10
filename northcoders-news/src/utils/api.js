@@ -20,3 +20,10 @@ export const getTopics = async () => {
   const { data } = await request.get("/topics");
   return data;
 };
+
+export const getComments = async (article_id, sort_by, order, limit, p) => {
+  const { data } = await request.get(`/articles/${article_id}/comments`, {
+    params: { sort_by, order, limit, p }
+  });
+  return data;
+};

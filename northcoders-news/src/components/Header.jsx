@@ -1,7 +1,12 @@
 import React from "react";
+import styles from "../styling/Header.module.css";
 
 function Header() {
-  return <h1>Northcoders News</h1>;
+  return (
+    <div className={styles.header}>
+      <h1>Northcoders News</h1>
+    </div>
+  );
 }
 
 export default Header;

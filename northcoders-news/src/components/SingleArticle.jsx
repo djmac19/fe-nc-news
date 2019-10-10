@@ -1,12 +1,15 @@
 import React from "react";
-import { Router } from "@reach/router";
 import Article from "./Article";
+import ViewToggler from "./reusable/ViewToggler";
+import CommentsList from "./CommentsList";
 
 function SingleArticle({ article_id }) {
   return (
     <section>
       <Article article_id={article_id} />
-      <Router path="/comments">{/* <CommentsList /> */}</Router>
+      <ViewToggler>
+        <CommentsList article_id={article_id} />
+      </ViewToggler>
     </section>
   );
 }
