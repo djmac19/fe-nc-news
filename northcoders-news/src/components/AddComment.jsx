@@ -12,10 +12,10 @@ class AddComment extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { article_id, loggedInUser } = this.props;
+    const { article_id, loggedInUser, addComment } = this.props;
     const { body } = this.state;
     api.postComment(article_id, loggedInUser, body).then(data => {
-      console.log(data);
+      addComment(loggedInUser, body);
       this.setState({ body: "" });
     });
   };

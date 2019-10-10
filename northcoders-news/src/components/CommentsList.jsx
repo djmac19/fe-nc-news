@@ -28,6 +28,24 @@ class CommentsList extends Component {
     });
   };
 
+  addComment = (username, body) => {
+    this.setState(currState => {
+      const newState = { ...currState };
+      const date = new Date();
+      return {
+        comments: [
+          ...newState.comments,
+          {
+            author: username,
+            body,
+            votes: 0,
+            created_at: date.toString().slice(0, 24)
+          }
+        ]
+      };
+    });
+  };
+
   componentDidMount() {
     const { article_id } = this.props;
     const { sort_by, order, limit, p } = this.state.queries;
@@ -66,7 +84,11 @@ class CommentsList extends Component {
             comments.map(comment => {
               return <Comment key={comment.comment_id} {...comment} />;
             })}
-          <AddComment article_id={article_id} loggedInUser={loggedInUser} />
+          <AddComment
+            article_id={article_id}
+            loggedInUser={loggedInUser}
+            addComment={this.addComment}
+          />
           <Page updateQueries={this.updateQueries} />
         </section>
       </section>

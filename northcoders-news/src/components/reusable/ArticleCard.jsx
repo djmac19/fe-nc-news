@@ -12,7 +12,7 @@ function ArticleCard({ article_id, title, author, votes, created_at }) {
         by <Link to={`/articles/users/${author}`}>{author}</Link>
       </p>
       <p>Votes: {votes}</p>
-      <p>Created At: {date.toDateString()}</p>
+      <p>Created At: {date.toString().slice(0, 24)}</p>
     </section>
   );
 }

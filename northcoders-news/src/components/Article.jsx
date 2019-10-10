@@ -26,7 +26,7 @@ class Article extends Component {
             by <Link to={`/articles/users/${author}`}>{author}</Link>
           </p>
           <p>{body}</p>
-          <p>Created: {date.toDateString()}</p>
+          <p>Created: {date.toString().slice(0, 24)}</p>
         </section>
       );
     }

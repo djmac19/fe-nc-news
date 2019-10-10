@@ -10,7 +10,7 @@ function Comment({ body, author, created_at, votes }) {
       </h3>
       <p>{body}</p>
       <p>Votes: {votes}</p>
-      <p>Created At: {date.toDateString()}</p>
+      <p>Created At: {date.toString().slice(0, 24)}</p>
     </section>
   );
 }
