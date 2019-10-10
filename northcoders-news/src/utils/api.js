@@ -27,3 +27,11 @@ export const getComments = async (article_id, sort_by, order, limit, p) => {
   });
   return data;
 };
+
+export const postComment = async (article_id, username, body) => {
+  const { data } = await request.post(`/articles/${article_id}/comments`, {
+    username,
+    body
+  });
+  return data;
+};

@@ -3,6 +3,7 @@ import * as api from "../utils/api.js";
 import Queries from "./queries/Queries";
 import Comment from "./Comment";
 import Page from "./Page";
+import AddComment from "./AddComment";
 
 class CommentsList extends Component {
   state = {
@@ -54,6 +55,7 @@ class CommentsList extends Component {
 
   render() {
     const { comments, isLoading } = this.state;
+    const { article_id, loggedInUser } = this.props;
     return isLoading ? (
       <p>loading...</p>
     ) : (
@@ -62,8 +64,9 @@ class CommentsList extends Component {
         <section>
           {comments &&
             comments.map(comment => {
-              return <Comment {...comment} />;
+              return <Comment key={comment.comment_id} {...comment} />;
             })}
+          <AddComment article_id={article_id} loggedInUser={loggedInUser} />
           <Page updateQueries={this.updateQueries} />
         </section>
       </section>

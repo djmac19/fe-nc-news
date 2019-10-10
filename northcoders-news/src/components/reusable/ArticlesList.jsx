@@ -41,7 +41,7 @@ class ArticlesList extends Component {
       <section>
         {articles &&
           articles.map(article => {
-            return <ArticleCard {...article} />;
+            return <ArticleCard key={article.article_id} {...article} />;
           })}
       </section>
     );
