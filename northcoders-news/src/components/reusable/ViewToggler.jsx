@@ -15,7 +15,9 @@ class ViewToggler extends Component {
     return (
       <section>
         <section>
-          <button onClick={this.handleShowHide}>Show/Hide</button>
+          <button onClick={this.handleShowHide}>
+            {isShowing ? "Hide" : "Show"} Comments
+          </button>
         </section>
         {isShowing && <section>{children}</section>}
       </section>

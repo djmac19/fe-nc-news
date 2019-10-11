@@ -7,7 +7,7 @@ function Limit({ updateQueries }) {
   };
   return (
     <form>
-      <h4>Results per page:</h4>
+      <h4>Per Page:</h4>
       <select onClick={handleClick}>
         <option value="10">10</option>
         <option value="20">20</option>

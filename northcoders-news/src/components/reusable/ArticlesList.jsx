@@ -10,11 +10,14 @@ class ArticlesList extends Component {
   };
 
   componentDidMount() {
-    const { sort_by, order, author, topic, limit, p } = this.props;
+    const { sort_by, order, author, topic, limit, p, updateCount } = this.props;
     api
       .getArticles(sort_by, order, author, topic, limit, p)
       .then(({ articles, total_count }) => {
         this.setState({ articles, total_count, isLoading: false });
+        if (updateCount) {
+          updateCount(total_count);
+        }
       });
   }
 

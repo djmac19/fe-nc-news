@@ -4,10 +4,10 @@ import SortBy from "./SortBy";
 import Order from "./Order";
 import Limit from "./Limit";
 
-function Queries({ updateQueries }) {
+function Queries({ updateQueries, columns }) {
   return (
     <section className="FlexColumn">
-      <SortBy updateQueries={updateQueries} />
+      <SortBy updateQueries={updateQueries} columns={columns} />
       <Order updateQueries={updateQueries} />
       <Limit updateQueries={updateQueries} />
     </section>

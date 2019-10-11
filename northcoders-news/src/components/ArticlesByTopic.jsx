@@ -13,7 +13,8 @@ class ArticlesByTopic extends Component {
       topic: this.props.slug,
       limit: null,
       p: 1
-    }
+    },
+    count: null
   };
 
   updateQueries = (key, value) => {
@@ -21,6 +22,10 @@ class ArticlesByTopic extends Component {
       const newState = { ...currState };
       return { queries: { ...newState.queries, [key]: value } };
     });
+  };
+
+  updateCount = count => {
+    this.setState({ count });
   };
 
   changePage = value => {
@@ -44,11 +49,22 @@ class ArticlesByTopic extends Component {
   }
 
   render() {
+    const { queries } = this.state;
     return (
       <section className="FlexRow">
-        <Queries updateQueries={this.updateQueries} />
+        <section className="FlexColumn">
+          <Queries
+            updateQueries={this.updateQueries}
+            columns={{
+              created_at: "Date Created",
+              comment_count: "Comments",
+              votes: "Votes"
+            }}
+          />
+          <h4>Total: {this.state.count}</h4>
+        </section>
         <section>
-          <ArticlesList {...this.state.queries} />
+          <ArticlesList {...queries} updateCount={this.updateCount} />
           <Page changePage={this.changePage} />
         </section>
       </section>

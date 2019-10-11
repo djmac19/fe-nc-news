@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as api from "../utils/api.js";
-import Queries from "./queries/Queries";
 import Comment from "./Comment";
 import Page from "./Page";
 import AddComment from "./AddComment";
@@ -8,24 +7,7 @@ import AddComment from "./AddComment";
 class CommentsList extends Component {
   state = {
     comments: null,
-    isLoading: true,
-    queries: { sort_by: null, order: null, limit: null, p: null }
-  };
-
-  updateQueries = (key, value) => {
-    this.setState(currState => {
-      const newState = { ...currState };
-      return { queries: { ...newState.queries, [key]: value } };
-    });
-  };
-
-  changePage = value => {
-    this.setState(currState => {
-      const newState = { ...currState };
-      return {
-        queries: { ...newState.queries, p: newState.queries.p + value }
-      };
-    });
+    isLoading: true
   };
 
   addComment = (username, body) => {
@@ -58,8 +40,7 @@ class CommentsList extends Component {
   };
 
   componentDidMount() {
-    const { article_id } = this.props;
-    const { sort_by, order, limit, p } = this.state.queries;
+    const { article_id, sort_by, order, limit, p } = this.props;
     api
       .getComments(article_id, sort_by, order, limit, p)
       .then(({ comments }) => {
@@ -70,16 +51,14 @@ class CommentsList extends Component {
   componentDidUpdate(prevProps, prevState) {
     window.scrollTo(0, 0);
     const queries = ["sort_by", "order", "limit", "p"];
+    const propsChanged =
+      queries.some(query => prevProps[query] !== this.props[query]) ||
+      prevProps.article_id !== this.props.article_id;
     const stateChanged =
-      queries.some(
-        query => prevState.queries[query] !== this.state.queries[query]
-      ) ||
-      (prevState.comments &&
-        prevState.comments.length !== this.state.comments.length);
-    const propsChanged = prevProps.article_id !== this.props.article_id;
+      prevState.comments &&
+      prevState.comments.length !== this.state.comments.length;
     if (propsChanged || stateChanged) {
-      const { article_id } = this.props;
-      const { sort_by, order, limit, p } = this.state.queries;
+      const { article_id, sort_by, order, limit, p } = this.props;
       api
         .getComments(article_id, sort_by, order, limit, p)
         .then(({ comments }) => this.setState({ comments, isLoading: false }));
@@ -88,31 +67,30 @@ class CommentsList extends Component {
 
   render() {
     const { comments, isLoading } = this.state;
-    const { article_id, loggedInUser } = this.props;
+    const { article_id, loggedInUser, updateCount } = this.props;
     return isLoading ? (
       <p>loading...</p>
     ) : (
-      <section className="FlexRow">
-        <Queries updateQueries={this.updateQueries} />
-        <section>
-          {comments &&
-            comments.map(comment => {
-              return (
-                <Comment
-                  key={comment.comment_id}
-                  {...comment}
-                  loggedInUser={loggedInUser}
-                  removeComment={this.removeComment}
-                />
-              );
-            })}
-          <AddComment
-            article_id={article_id}
-            loggedInUser={loggedInUser}
-            addComment={this.addComment}
-          />
-          <Page updateQueries={this.updateQueries} />
-        </section>
+      <section>
+        {comments &&
+          comments.map(comment => {
+            return (
+              <Comment
+                key={comment.comment_id}
+                {...comment}
+                loggedInUser={loggedInUser}
+                removeComment={this.removeComment}
+                updateCount={updateCount}
+              />
+            );
+          })}
+        <AddComment
+          article_id={article_id}
+          loggedInUser={loggedInUser}
+          addComment={this.addComment}
+          updateCount={updateCount}
+        />
+        <Page updateQueries={this.updateQueries} />
       </section>
     );
   }

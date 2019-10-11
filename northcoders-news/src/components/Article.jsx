@@ -7,9 +7,10 @@ class Article extends Component {
   state = { article: null, isLoading: true };
 
   componentDidMount() {
-    const { article_id } = this.props;
+    const { article_id, updateCount } = this.props;
     api.getArticle(article_id).then(({ article }) => {
       this.setState({ article, isLoading: false });
+      updateCount(article.comment_count);
     });
   }
 
@@ -35,7 +36,6 @@ class Article extends Component {
             by <Link to={`/articles/users/${author}`}>{author}</Link>
           </p>
           <p>{body}</p>
-          <p>Created: {date.toString().slice(0, 24)}</p>
           <Votes
             item="articles"
             id={article_id}
@@ -43,6 +43,7 @@ class Article extends Component {
             author={author}
             loggedInUser={loggedInUser}
           />
+          <p>Created: {date.toString().slice(0, 24)}</p>
         </section>
       );
     }

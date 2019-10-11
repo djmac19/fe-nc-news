@@ -10,7 +10,8 @@ function Comment({
   created_at,
   votes,
   loggedInUser,
-  removeComment
+  removeComment,
+  updateCount
 }) {
   const date = new Date(created_at);
   return (
@@ -32,6 +33,7 @@ function Comment({
         author={author}
         loggedInUser={loggedInUser}
         removeComment={removeComment}
+        updateCount={updateCount}
       />
     </section>
   );
