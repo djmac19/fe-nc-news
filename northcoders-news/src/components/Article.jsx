@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import * as api from "../utils/api";
+import Votes from "./Votes";
 
 class Article extends Component {
   state = { article: null, isLoading: true };
@@ -17,7 +18,15 @@ class Article extends Component {
     if (isLoading) {
       return <p>loading...</p>;
     } else {
-      const { title, author, body, created_at } = this.state.article;
+      const {
+        article_id,
+        title,
+        author,
+        body,
+        created_at,
+        votes
+      } = this.state.article;
+      const { loggedInUser } = this.props;
       const date = new Date(created_at);
       return (
         <section>
@@ -27,6 +36,13 @@ class Article extends Component {
           </p>
           <p>{body}</p>
           <p>Created: {date.toString().slice(0, 24)}</p>
+          <Votes
+            item="articles"
+            id={article_id}
+            votes={votes}
+            author={author}
+            loggedInUser={loggedInUser}
+          />
         </section>
       );
     }

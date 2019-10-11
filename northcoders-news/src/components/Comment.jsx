@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "@reach/router";
+import DeleteComment from "./DeleteComment";
+import Votes from "./Votes";
 
-function Comment({ body, author, created_at, votes }) {
+function Comment({
+  comment_id,
+  body,
+  author,
+  created_at,
+  votes,
+  loggedInUser,
+  removeComment
+}) {
   const date = new Date(created_at);
   return (
     <section>
@@ -9,8 +19,20 @@ function Comment({ body, author, created_at, votes }) {
         <Link to="/articles/users/:username">{author}</Link>
       </h3>
       <p>{body}</p>
-      <p>Votes: {votes}</p>
       <p>Created At: {date.toString().slice(0, 24)}</p>
+      <Votes
+        item="comments"
+        id={comment_id}
+        votes={votes}
+        author={author}
+        loggedInUser={loggedInUser}
+      />
+      <DeleteComment
+        comment_id={comment_id}
+        author={author}
+        loggedInUser={loggedInUser}
+        removeComment={removeComment}
+      />
     </section>
   );
 }

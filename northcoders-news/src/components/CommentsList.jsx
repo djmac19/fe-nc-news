@@ -36,6 +36,7 @@ class CommentsList extends Component {
         comments: [
           ...newState.comments,
           {
+            comment_id: 0,
             author: username,
             body,
             votes: 0,
@@ -43,6 +44,16 @@ class CommentsList extends Component {
           }
         ]
       };
+    });
+  };
+
+  removeComment = comment_id => {
+    this.setState(currState => {
+      const newComments = [...currState.comments].filter(
+        comment => comment.comment_id !== comment_id
+      );
+
+      return { comments: newComments };
     });
   };
 
@@ -57,10 +68,14 @@ class CommentsList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    window.scrollTo(0, 0);
     const queries = ["sort_by", "order", "limit", "p"];
-    const stateChanged = queries.some(
-      query => prevState.queries[query] !== this.state.queries[query]
-    );
+    const stateChanged =
+      queries.some(
+        query => prevState.queries[query] !== this.state.queries[query]
+      ) ||
+      (prevState.comments &&
+        prevState.comments.length !== this.state.comments.length);
     const propsChanged = prevProps.article_id !== this.props.article_id;
     if (propsChanged || stateChanged) {
       const { article_id } = this.props;
@@ -82,7 +97,14 @@ class CommentsList extends Component {
         <section>
           {comments &&
             comments.map(comment => {
-              return <Comment key={comment.comment_id} {...comment} />;
+              return (
+                <Comment
+                  key={comment.comment_id}
+                  {...comment}
+                  loggedInUser={loggedInUser}
+                  removeComment={this.removeComment}
+                />
+              );
             })}
           <AddComment
             article_id={article_id}

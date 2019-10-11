@@ -6,7 +6,7 @@ import CommentsList from "./CommentsList";
 function SingleArticle({ article_id, loggedInUser }) {
   return (
     <section>
-      <Article article_id={article_id} />
+      <Article article_id={article_id} loggedInUser={loggedInUser} />
       <ViewToggler>
         <CommentsList article_id={article_id} loggedInUser={loggedInUser} />
       </ViewToggler>
