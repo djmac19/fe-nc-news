@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import styles from "../styling/Article.module.css";
 import * as api from "../utils/api";
 import Votes from "./Votes";
 
@@ -15,6 +16,12 @@ class Article extends Component {
   }
 
   render() {
+    const images = {
+      coding:
+        "http://downloads.bbc.co.uk/schoolradio/assemblies/images/computer_code.jpg",
+      football: "https://ichef.bbci.co.uk/images/ic/1920x1080/p05h62gc.jpg",
+      cooking: "https://ichef.bbci.co.uk/images/ic/1920x1080/p031y9w7.jpg"
+    };
     const { isLoading } = this.state;
     if (isLoading) {
       return <p>loading...</p>;
@@ -23,6 +30,7 @@ class Article extends Component {
         article_id,
         title,
         author,
+        topic,
         body,
         created_at,
         votes
@@ -31,6 +39,7 @@ class Article extends Component {
       const date = new Date(created_at);
       return (
         <section>
+          <img className={styles.photo} src={images[topic]} alt={`${topic}`} />
           <h3>{title}</h3>
           <p>
             by <Link to={`/articles/users/${author}`}>{author}</Link>

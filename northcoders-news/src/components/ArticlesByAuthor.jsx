@@ -7,11 +7,11 @@ import Page from "./Page";
 class ArticlesByAuthor extends Component {
   state = {
     queries: {
-      sort_by: null,
-      order: null,
+      sort_by: "created_at",
+      order: "desc",
       author: this.props.username,
       topic: null,
-      limit: null,
+      limit: 10,
       p: 1
     },
     count: null
@@ -19,8 +19,7 @@ class ArticlesByAuthor extends Component {
 
   updateQueries = (key, value) => {
     this.setState(currState => {
-      const newState = { ...currState };
-      return { queries: { ...newState.queries, [key]: value } };
+      return { queries: { ...currState.queries, [key]: value } };
     });
   };
 
@@ -28,12 +27,10 @@ class ArticlesByAuthor extends Component {
     this.setState({ count });
   };
 
-  changePage = value => {
-    console.log("in changePage");
+  changePage = direction => {
     this.setState(currState => {
-      const newState = { ...currState };
       return {
-        queries: { ...newState.queries, p: newState.queries.p + value }
+        queries: { ...currState.queries, p: currState.queries.p + direction }
       };
     });
   };
@@ -42,31 +39,39 @@ class ArticlesByAuthor extends Component {
     const authorChanged = prevProps.username !== this.props.username;
     if (authorChanged) {
       this.setState(currState => {
-        const newState = { ...currState };
         return {
-          queries: { ...newState.queries, author: this.props.username }
+          queries: { ...currState.queries, author: this.props.username }
         };
       });
     }
   }
 
   render() {
-    const { queries } = this.state;
+    const { queries, count } = this.state;
+    const { username } = this.props;
     return (
-      <section className="FlexRow">
-        <section className="FlexColumn">
-          <Queries
-            updateQueries={this.updateQueries}
-            columns={{
-              created_at: "Date Created",
-              comment_count: "Comments",
-              votes: "Votes"
-            }}
-          />
-        </section>
-        <section>
-          <ArticlesList {...queries} updateCount={this.updateCount} />
-          <Page changePage={this.changePage} />
+      <section>
+        <h2>Articles by {`${username}`}</h2>
+        <section className="FlexRow">
+          <section className="FlexColumn">
+            <Queries
+              updateQueries={this.updateQueries}
+              columns={{
+                created_at: "Date Created",
+                comment_count: "Comments",
+                votes: "Votes"
+              }}
+            />
+          </section>
+          <section>
+            <ArticlesList {...queries} updateCount={this.updateCount} />
+            <Page
+              limit={queries.limit}
+              p={queries.p}
+              count={count}
+              changePage={this.changePage}
+            />
+          </section>
         </section>
       </section>
     );

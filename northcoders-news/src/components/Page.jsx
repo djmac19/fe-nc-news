@@ -1,20 +1,31 @@
 import React from "react";
 
-function Page({ changePage }) {
-  const handleClick = event => {
-    console.log("in handleClick");
-    const { value } = event.target;
-    changePage(value);
+function Page({ limit, p, count, changePage }) {
+  const handleClick = direction => {
+    changePage(direction);
   };
   return (
-    <section>
-      <button value="-1" onClick={handleClick}>
-        Prev Page
-      </button>
-      <button value="1" onClick={handleClick}>
-        Next Page
-      </button>
-    </section>
+    count > limit && (
+      <section>
+        <button
+          onClick={() => {
+            handleClick(-1);
+          }}
+          disabled={p === 1}
+        >
+          Prev Page
+        </button>{" "}
+        Page: {p}{" "}
+        <button
+          onClick={() => {
+            handleClick(1);
+          }}
+          disabled={count <= limit * p}
+        >
+          Next Page
+        </button>
+      </section>
+    )
   );
 }
 

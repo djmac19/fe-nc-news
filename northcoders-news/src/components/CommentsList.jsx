@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import * as api from "../utils/api.js";
+import * as api from "../utils/api";
 import Comment from "./Comment";
-import Page from "./Page";
 import AddComment from "./AddComment";
 
 class CommentsList extends Component {
@@ -12,11 +11,10 @@ class CommentsList extends Component {
 
   addComment = (username, body) => {
     this.setState(currState => {
-      const newState = { ...currState };
       const date = new Date();
       return {
         comments: [
-          ...newState.comments,
+          ...currState.comments,
           {
             comment_id: 0,
             author: username,
@@ -49,7 +47,6 @@ class CommentsList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    window.scrollTo(0, 0);
     const queries = ["sort_by", "order", "limit", "p"];
     const propsChanged =
       queries.some(query => prevProps[query] !== this.props[query]) ||
@@ -90,7 +87,6 @@ class CommentsList extends Component {
           addComment={this.addComment}
           updateCount={updateCount}
         />
-        <Page updateQueries={this.updateQueries} />
       </section>
     );
   }

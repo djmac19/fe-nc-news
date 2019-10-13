@@ -3,25 +3,24 @@ import Article from "./Article";
 import ViewToggler from "./reusable/ViewToggler";
 import Queries from "./queries/Queries";
 import CommentsList from "./CommentsList";
+import Page from "./Page";
 
 class SingleArticle extends Component {
   state = {
-    queries: { sort_by: null, order: null, limit: null, p: null },
+    queries: { sort_by: "created_at", order: "desc", limit: 10, p: 1 },
     count: 0
   };
 
   updateQueries = (key, value) => {
     this.setState(currState => {
-      const newState = { ...currState };
-      return { queries: { ...newState.queries, [key]: value } };
+      return { queries: { ...currState.queries, [key]: value } };
     });
   };
 
-  changePage = value => {
+  changePage = direction => {
     this.setState(currState => {
-      const newState = { ...currState };
       return {
-        queries: { ...newState.queries, p: newState.queries.p + value }
+        queries: { ...currState.queries, p: currState.queries.p + direction }
       };
     });
   };
@@ -51,12 +50,21 @@ class SingleArticle extends Component {
               />
               <h4>Total: {count}</h4>
             </section>
-            <CommentsList
-              {...queries}
-              article_id={article_id}
-              loggedInUser={loggedInUser}
-              updateCount={this.updateCount}
-            />
+            <section className="FlexColumn">
+              <CommentsList
+                {...queries}
+                article_id={article_id}
+                loggedInUser={loggedInUser}
+                updateCount={this.updateCount}
+                changePage={this.changePage}
+              />
+              <Page
+                limit={queries.limit}
+                p={queries.p}
+                count={count}
+                changePage={this.changePage}
+              />
+            </section>
           </section>
         </ViewToggler>
       </section>

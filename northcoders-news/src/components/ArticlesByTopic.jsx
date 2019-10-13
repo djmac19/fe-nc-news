@@ -7,11 +7,11 @@ import Page from "./Page";
 class ArticlesByTopic extends Component {
   state = {
     queries: {
-      sort_by: null,
-      order: null,
+      sort_by: "created_at",
+      order: "desc",
       author: null,
       topic: this.props.slug,
-      limit: null,
+      limit: 10,
       p: 1
     },
     count: null
@@ -19,8 +19,7 @@ class ArticlesByTopic extends Component {
 
   updateQueries = (key, value) => {
     this.setState(currState => {
-      const newState = { ...currState };
-      return { queries: { ...newState.queries, [key]: value } };
+      return { queries: { ...currState.queries, [key]: value } };
     });
   };
 
@@ -28,12 +27,10 @@ class ArticlesByTopic extends Component {
     this.setState({ count });
   };
 
-  changePage = value => {
-    console.log("in changePage");
+  changePage = direction => {
     this.setState(currState => {
-      const newState = { ...currState };
       return {
-        queries: { ...newState.queries, p: newState.queries.p + value }
+        queries: { ...currState.queries, p: currState.queries.p + direction }
       };
     });
   };
@@ -42,30 +39,38 @@ class ArticlesByTopic extends Component {
     const topicChanged = prevProps.slug !== this.props.slug;
     if (topicChanged) {
       this.setState(currState => {
-        const newState = { ...currState };
-        return { queries: { ...newState.queries, topic: this.props.slug } };
+        return { queries: { ...currState.queries, topic: this.props.slug } };
       });
     }
   }
 
   render() {
-    const { queries } = this.state;
+    const { queries, count } = this.state;
+    const { slug } = this.props;
     return (
-      <section className="FlexRow">
-        <section className="FlexColumn">
-          <Queries
-            updateQueries={this.updateQueries}
-            columns={{
-              created_at: "Date Created",
-              comment_count: "Comments",
-              votes: "Votes"
-            }}
-          />
-          <h4>Total: {this.state.count}</h4>
-        </section>
-        <section>
-          <ArticlesList {...queries} updateCount={this.updateCount} />
-          <Page changePage={this.changePage} />
+      <section>
+        <h2>Articles about {`${slug.toUpperCase()}`}</h2>
+        <section className="FlexRow">
+          <section className="FlexColumn">
+            <Queries
+              updateQueries={this.updateQueries}
+              columns={{
+                created_at: "Date Created",
+                comment_count: "Comments",
+                votes: "Votes"
+              }}
+            />
+            <h4>Total: {this.state.count}</h4>
+          </section>
+          <section>
+            <ArticlesList {...queries} updateCount={this.updateCount} />
+            <Page
+              limit={queries.limit}
+              p={queries.p}
+              count={count}
+              changePage={this.changePage}
+            />
+          </section>
         </section>
       </section>
     );

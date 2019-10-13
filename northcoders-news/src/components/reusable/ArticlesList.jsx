@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as api from "../../utils/api.js";
+import * as api from "../../utils/api";
 import ArticleCard from "./ArticleCard";
 
 class ArticlesList extends Component {
