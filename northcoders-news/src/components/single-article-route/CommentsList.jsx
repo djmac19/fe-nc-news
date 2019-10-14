@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import * as api from "../utils/api";
+import * as api from "../../utils/api";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
+import Error from "../reusable/errors/Error";
 
 class CommentsList extends Component {
   state = {
     comments: null,
-    isLoading: true
+    isLoading: true,
+    error: null
   };
 
   addComment = (username, body) => {
@@ -42,8 +44,16 @@ class CommentsList extends Component {
     api
       .getComments(article_id, sort_by, order, limit, p)
       .then(({ comments }) => {
-        this.setState({ comments, isLoading: false });
-      });
+        this.setState({ comments, isLoading: false, error: null });
+      })
+      .catch(error =>
+        this.setState({
+          error: {
+            msg: error.response.data.msg,
+            status: error.response.status
+          }
+        })
+      );
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,14 +68,26 @@ class CommentsList extends Component {
       const { article_id, sort_by, order, limit, p } = this.props;
       api
         .getComments(article_id, sort_by, order, limit, p)
-        .then(({ comments }) => this.setState({ comments, isLoading: false }));
+        .then(({ comments }) =>
+          this.setState({ comments, isLoading: false, error: null })
+        )
+        .catch(error =>
+          this.setState({
+            error: {
+              msg: error.response.data.msg,
+              status: error.response.status
+            }
+          })
+        );
     }
   }
 
   render() {
-    const { comments, isLoading } = this.state;
+    const { comments, isLoading, error } = this.state;
     const { article_id, loggedInUser, updateCount } = this.props;
-    return isLoading ? (
+    return error ? (
+      <Error {...error} />
+    ) : isLoading ? (
       <p>loading...</p>
     ) : (
       <section>

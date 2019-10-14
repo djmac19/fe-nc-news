@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Article from "./Article";
-import ViewToggler from "./reusable/ViewToggler";
-import Queries from "./queries/Queries";
+import ViewToggler from "../reusable/ViewToggler";
+import Queries from "../reusable/queries/Queries";
 import CommentsList from "./CommentsList";
-import Page from "./Page";
+import Page from "../reusable/queries/Page";
 
 class SingleArticle extends Component {
   state = {

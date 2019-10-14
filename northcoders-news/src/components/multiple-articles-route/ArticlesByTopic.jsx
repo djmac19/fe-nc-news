@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import "../index.css";
-import Queries from "./queries/Queries";
-import ArticlesList from "./reusable/ArticlesList";
-import Page from "./Page";
+import "../../index.css";
+import Queries from "../reusable/queries/Queries";
+import ArticlesList from "../reusable/ArticlesList";
+import Page from "../reusable/queries/Page";
 
-class ArticlesByAuthor extends Component {
+class ArticlesByTopic extends Component {
   state = {
     queries: {
       sort_by: "created_at",
       order: "desc",
-      author: this.props.username,
-      topic: null,
+      author: null,
+      topic: this.props.slug,
       limit: 10,
       p: 1
     },
@@ -36,22 +36,20 @@ class ArticlesByAuthor extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const authorChanged = prevProps.username !== this.props.username;
-    if (authorChanged) {
+    const topicChanged = prevProps.slug !== this.props.slug;
+    if (topicChanged) {
       this.setState(currState => {
-        return {
-          queries: { ...currState.queries, author: this.props.username }
-        };
+        return { queries: { ...currState.queries, topic: this.props.slug } };
       });
     }
   }
 
   render() {
     const { queries, count } = this.state;
-    const { username } = this.props;
+    const { slug } = this.props;
     return (
       <section>
-        <h2>Articles by {`${username}`}</h2>
+        <h2>Articles about {`${slug.toUpperCase()}`}</h2>
         <section className="FlexRow">
           <section className="FlexColumn">
             <Queries
@@ -62,6 +60,7 @@ class ArticlesByAuthor extends Component {
                 votes: "Votes"
               }}
             />
+            <h4>Total: {this.state.count}</h4>
           </section>
           <section>
             <ArticlesList {...queries} updateCount={this.updateCount} />
@@ -78,4 +77,4 @@ class ArticlesByAuthor extends Component {
   }
 }
 
-export default ArticlesByAuthor;
+export default ArticlesByTopic;

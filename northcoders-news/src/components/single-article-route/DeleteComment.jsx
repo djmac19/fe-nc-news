@@ -1,5 +1,5 @@
 import React from "react";
-import * as api from "../utils/api";
+import * as api from "../../utils/api";
 
 function DeleteComment({
   comment_id,

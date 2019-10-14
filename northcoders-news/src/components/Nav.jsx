@@ -2,17 +2,34 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import { Link } from "@reach/router";
 import styles from "../styling/Nav.module.css";
+import Error from "./reusable/errors/Error";
 
 class Nav extends Component {
-  state = { topics: null };
+  state = { topics: null, isLoading: true, error: null };
 
   componentDidMount() {
-    api.getTopics().then(topics => this.setState(topics));
+    api
+      .getTopics()
+      .then(({ topics }) =>
+        this.setState({ topics, isLoading: false, error: null })
+      )
+      .catch(error => {
+        this.setState({
+          error: {
+            msg: error.response.data.msg,
+            status: error.response.status
+          }
+        });
+      });
   }
 
   render() {
-    const { topics } = this.state;
-    return (
+    const { topics, isLoading, error } = this.state;
+    return error ? (
+      <Error {...error} />
+    ) : isLoading ? (
+      <p>loading...</p>
+    ) : (
       <nav className={styles.navbar}>
         <h3 key="home">
           <Link to="/">HOME</Link>

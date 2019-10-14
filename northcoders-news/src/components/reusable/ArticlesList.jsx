@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import * as api from "../../utils/api";
 import ArticleCard from "./ArticleCard";
+import Error from "./errors/Error";
 
 class ArticlesList extends Component {
   state = {
     articles: null,
     total_count: null,
-    isLoading: true
+    isLoading: true,
+    error: null
   };
 
   componentDidMount() {
@@ -14,11 +16,16 @@ class ArticlesList extends Component {
     api
       .getArticles(sort_by, order, author, topic, limit, p)
       .then(({ articles, total_count }) => {
-        this.setState({ articles, total_count, isLoading: false });
+        this.setState({ articles, total_count, isLoading: false, error: null });
         if (updateCount) {
           updateCount(total_count);
         }
-      });
+      })
+      .catch(error =>
+        this.setState({
+          error: { msg: error.response.data.msg, status: error.response.status }
+        })
+      );
   }
 
   componentDidUpdate(prevProps) {
@@ -31,14 +38,29 @@ class ArticlesList extends Component {
       api
         .getArticles(sort_by, order, author, topic, limit, p)
         .then(({ articles, total_count }) =>
-          this.setState({ articles, total_count, isLoading: false })
+          this.setState({
+            articles,
+            total_count,
+            isLoading: false,
+            error: null
+          })
+        )
+        .catch(error =>
+          this.setState({
+            error: {
+              msg: error.response.data.msg,
+              status: error.response.status
+            }
+          })
         );
     }
   }
 
   render() {
-    const { articles, isLoading } = this.state;
-    return isLoading ? (
+    const { articles, isLoading, error } = this.state;
+    return error ? (
+      <Error {...error} />
+    ) : isLoading ? (
       <p>loading...</p>
     ) : (
       <section>

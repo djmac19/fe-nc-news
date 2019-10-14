@@ -4,10 +4,11 @@ import { Router } from "@reach/router";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
-import AllArticles from "./components/AllArticles";
-import ArticlesByTopic from "./components/ArticlesByTopic";
-import ArticlesByAuthor from "./components/ArticlesByAuthor";
-import SingleArticle from "./components/SingleArticle";
+import AllArticles from "./components/multiple-articles-route/AllArticles";
+import ArticlesByTopic from "./components/multiple-articles-route/ArticlesByTopic";
+import ArticlesByAuthor from "./components/multiple-articles-route/ArticlesByAuthor";
+import SingleArticle from "./components/single-article-route/SingleArticle";
+import NotFound from "./components/reusable/errors/NotFound";
 
 class App extends Component {
   state = { loggedInUser: "jessjelly" };
@@ -18,7 +19,7 @@ class App extends Component {
       <div className="App">
         <Header loggedInUser={loggedInUser} />
         <Nav />
-        <Router>
+        <Router primary={false}>
           <Home path="/" />
           <AllArticles path="/articles" />
           <ArticlesByTopic path="/articles/topics/:slug" />
@@ -27,6 +28,7 @@ class App extends Component {
             path="/articles/:article_id/*"
             loggedInUser={loggedInUser}
           />
+          <NotFound default />
         </Router>
       </div>
     );

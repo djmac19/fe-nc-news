@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 import DeleteComment from "./DeleteComment";
-import Votes from "./Votes";
+import Votes from "../reusable/Votes";
 
 function Comment({
   comment_id,

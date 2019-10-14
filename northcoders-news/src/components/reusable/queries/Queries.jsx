@@ -1,5 +1,5 @@
 import React from "react";
-import "../../index.css";
+import "../../../index.css";
 import SortBy from "./SortBy";
 import Order from "./Order";
 import Limit from "./Limit";

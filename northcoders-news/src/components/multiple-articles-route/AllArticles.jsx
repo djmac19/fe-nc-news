@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "../index.css";
-import Queries from "./queries/Queries";
-import ArticlesList from "./reusable/ArticlesList";
-import Page from "./Page";
+import "../../index.css";
+import Queries from "../reusable/queries/Queries";
+import ArticlesList from "../reusable/ArticlesList";
+import Page from "../reusable/queries/Page";
 
 class AllArticles extends Component {
   state = {
