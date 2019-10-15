@@ -1,0 +1,53 @@
+.article_card {
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "image title title" "image author votes" "image created_at comments";
+  background-color: whitesmoke;
+  box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+  margin: 3%;
+  padding: 3%;
+  justify-items: center;
+  align-items: center;
+}
+
+.image {
+  grid-area: image;
+  max-width: 90%;
+  justify-self: left;
+}
+
+@media screen and (max-width: 704px) {
+  .article_card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr;
+    grid-template-areas: "image image" "title title" "author votes" "created_at comments";
+  }
+
+  .image {
+    grid-area: image;
+    max-width: 250px;
+    justify-self: center;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+
+.author {
+  grid-area: author;
+}
+
+.created_at {
+  grid-area: created_at;
+}
+
+.votes {
+  grid-area: votes;
+}
+
+.comments {
+  grid-area: comments;
+}

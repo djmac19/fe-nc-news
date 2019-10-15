@@ -34,7 +34,7 @@ class Votes extends Component {
       <section>
         <p>Votes: {votes + voteChange}</p>
         {author !== loggedInUser && (
-          <section>
+          <div>
             <button
               onClick={() => this.handleClick(1)}
               disabled={voteChange > 0}
@@ -47,7 +47,7 @@ class Votes extends Component {
             >
               Vote Down
             </button>
-          </section>
+          </div>
         )}
       </section>
     );

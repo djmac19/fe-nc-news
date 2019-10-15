@@ -1,3 +1,52 @@
-.photo {
-  max-width: 50%;
+.article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 7fr 2fr 2fr auto 3fr;
+  grid-template-areas: "image image" "title title" "author created_at" "body body" "votes comments";
+  background-color: whitesmoke;
+  box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+  margin: 3%;
+  padding: 3%;
+  justify-items: center;
+  align-items: center;
+}
+
+.image {
+  grid-area: image;
+  max-width: 450px;
+}
+
+@media screen and (max-width: 704px) {
+  .article {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image {
+    max-width: 250px;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+
+.author {
+  grid-area: author;
+}
+
+.created_at {
+  grid-area: created_at;
+}
+
+.body {
+  grid-area: body;
+}
+
+.votes {
+  grid-area: votes;
+}
+
+.comments {
+  grid-area: comments;
 }

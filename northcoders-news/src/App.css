@@ -1,9 +1,12 @@
 .App {
   text-align: center;
-  background-color: whitesmoke;
+  background-image: url("https://i.ytimg.com/vi/yGEOXfRfLAo/maxresdefault.jpg");
+  font-family: "Courier New", Courier, monospace;
+  padding-top: 1%;
+  padding-bottom: 2%;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
 }
 
@@ -20,4 +23,4 @@
 
 .App-link {
   color: #09d3ac;
-}
+} */

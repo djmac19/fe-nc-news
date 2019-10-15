@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { Router } from "@reach/router";
 import Article from "./Article";
 import ViewToggler from "../reusable/ViewToggler";
 import Queries from "../reusable/queries/Queries";
@@ -41,7 +42,8 @@ class SingleArticle extends Component {
           loggedInUser={loggedInUser}
           updateCount={this.updateCount}
         />
-        <ViewToggler>
+        <ViewToggler article_id={article_id}>
+          {/* <Router path="/comments"> */}
           <section className="FlexRow">
             <section className="FlexColumn">
               <Queries
@@ -66,6 +68,7 @@ class SingleArticle extends Component {
               />
             </section>
           </section>
+          {/* </Router> */}
         </ViewToggler>
       </section>
     );

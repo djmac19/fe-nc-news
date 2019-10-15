@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 
 class ViewToggler extends Component {
   state = { isShowing: false };
@@ -11,12 +12,14 @@ class ViewToggler extends Component {
 
   render() {
     const { isShowing } = this.state;
-    const { children } = this.props;
+    const { children, article_id } = this.props;
     return (
       <section>
         <section>
           <button onClick={this.handleShowHide}>
-            {isShowing ? "Hide" : "Show"} Comments
+            <Link to={`/articles/${article_id}/comments`}>
+              {isShowing ? "Hide" : "Show"} Comments
+            </Link>
           </button>
         </section>
         {isShowing && <section>{children}</section>}

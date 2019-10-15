@@ -1,0 +1,26 @@
+.filtered_articles {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-template-areas: "sidebar articles_list";
+  justify-content: center;
+  align-content: center;
+}
+
+@media screen and (max-width: 704px) {
+  .filtered_articles {
+    grid-template-rows: 1fr 9fr;
+    grid-template-areas: "sidebar" "articles_list";
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: horizontal;
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.articles_list {
+  grid-area: articles_list;
+}

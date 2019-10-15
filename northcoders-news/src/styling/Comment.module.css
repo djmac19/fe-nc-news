@@ -1,0 +1,30 @@
+.comment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto 2fr;
+  grid-template-areas: "author created_at" "body body" "delete votes";
+  background-color: whitesmoke;
+  box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+  margin: 3%;
+  padding: 3%;
+}
+
+.author {
+  grid-area: author;
+}
+
+.created_at {
+  grid-area: created_at;
+}
+
+.body {
+  grid-area: body;
+}
+
+.delete {
+  grid-area: delete;
+}
+
+.votes {
+  grid-area: votes;
+}

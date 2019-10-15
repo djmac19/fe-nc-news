@@ -1,0 +1,10 @@
+.queries {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 704px) {
+  .queries {
+    display: flex;
+  }
+}

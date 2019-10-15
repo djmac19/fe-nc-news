@@ -91,6 +91,12 @@ class CommentsList extends Component {
       <p>loading...</p>
     ) : (
       <section>
+        <AddComment
+          article_id={article_id}
+          loggedInUser={loggedInUser}
+          addComment={this.addComment}
+          updateCount={updateCount}
+        />
         {comments &&
           comments.map(comment => {
             return (
@@ -103,12 +109,6 @@ class CommentsList extends Component {
               />
             );
           })}
-        <AddComment
-          article_id={article_id}
-          loggedInUser={loggedInUser}
-          addComment={this.addComment}
-          updateCount={updateCount}
-        />
       </section>
     );
   }

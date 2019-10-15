@@ -39,7 +39,7 @@ class AllArticles extends Component {
     const { queries, count } = this.state;
     return (
       <section className="FlexRow">
-        <section className="FlexColumn">
+        <div className="FlexColumn">
           <Queries
             updateQueries={this.updateQueries}
             columns={{
@@ -49,8 +49,8 @@ class AllArticles extends Component {
             }}
           />
           <h4>Total: {this.state.count}</h4>
-        </section>
-        <section>
+        </div>
+        <div className="FlexColumn">
           <ArticlesList {...queries} updateCount={this.updateCount} />
           <Page
             limit={queries.limit}
@@ -58,7 +58,7 @@ class AllArticles extends Component {
             count={count}
             changePage={this.changePage}
           />
-        </section>
+        </div>
       </section>
     );
   }

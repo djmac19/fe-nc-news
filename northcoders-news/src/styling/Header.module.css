@@ -1,4 +1,6 @@
 .header {
   color: whitesmoke;
   background-color: darkslategrey;
+  border-bottom: 10px solid whitesmoke;
+  vertical-align: center;
 }

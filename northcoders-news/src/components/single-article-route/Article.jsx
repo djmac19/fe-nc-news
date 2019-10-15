@@ -42,28 +42,33 @@ class Article extends Component {
       <p>loading...</p>
     ) : (
       article && (
-        <section>
+        <section className={styles.article}>
           <img
-            className={styles.photo}
+            className={styles.image}
             src={images[article.topic]}
             alt={`${article.topic}`}
           />
-          <h3>{article.title}</h3>
-          <p>
+          <h3 className={styles.title}>{article.title}</h3>
+          <p className={styles.author}>
             by{" "}
             <Link to={`/articles/users/${article.author}`}>
               {article.author}
             </Link>
           </p>
-          <p>{article.body}</p>
+          <p className={styles.created_at}>
+            Date Created: <br />
+            {new Date(article.created_at).toString().slice(0, 24)}
+          </p>
+          <p className={styles.body}>{article.body}</p>
           <Votes
+            className={styles.votes}
             item="articles"
             id={article.article_id}
             votes={article.votes}
             author={article.author}
             loggedInUser={loggedInUser}
           />
-          <p>Created: {new Date(article.created_at).toString().slice(0, 24)}</p>
+          <p className={styles.comments}>Comments: {article.comment_count}</p>
         </section>
       )
     );

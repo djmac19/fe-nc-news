@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
+import styles from "../../styling/Comment.module.css";
 import DeleteComment from "./DeleteComment";
 import Votes from "../reusable/Votes";
 
@@ -15,13 +16,16 @@ function Comment({
 }) {
   const date = new Date(created_at);
   return (
-    <section>
-      <h3>
+    <section className={styles.comment}>
+      <h3 className={styles.author}>
         <Link to="/articles/users/:username">{author}</Link>
       </h3>
-      <p>{body}</p>
-      <p>Created At: {date.toString().slice(0, 24)}</p>
+      <p className={styles.created_at}>
+        Date Created: <br /> {date.toString().slice(0, 24)}
+      </p>
+      <p className={styles.body}>{body}</p>
       <Votes
+        className={styles.votes}
         item="comments"
         id={comment_id}
         votes={votes}
@@ -29,6 +33,7 @@ function Comment({
         loggedInUser={loggedInUser}
       />
       <DeleteComment
+        className={styles.delete}
         comment_id={comment_id}
         author={author}
         loggedInUser={loggedInUser}
