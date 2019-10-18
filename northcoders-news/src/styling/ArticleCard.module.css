@@ -3,12 +3,12 @@
   grid-template-columns: 4fr 3fr 3fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: "image title title" "image author votes" "image created_at comments";
+  justify-items: center;
+  align-items: center;
   background-color: whitesmoke;
   box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
   margin: 3%;
   padding: 3%;
-  justify-items: center;
-  align-items: center;
 }
 
 .image {

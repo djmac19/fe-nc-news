@@ -32,14 +32,15 @@ function Comment({
         author={author}
         loggedInUser={loggedInUser}
       />
-      <DeleteComment
-        className={styles.delete}
-        comment_id={comment_id}
-        author={author}
-        loggedInUser={loggedInUser}
-        removeComment={removeComment}
-        updateCount={updateCount}
-      />
+      <div className={styles.delete}>
+        <DeleteComment
+          comment_id={comment_id}
+          author={author}
+          loggedInUser={loggedInUser}
+          removeComment={removeComment}
+          updateCount={updateCount}
+        />
+      </div>
     </section>
   );
 }

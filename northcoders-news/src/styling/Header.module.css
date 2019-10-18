@@ -1,6 +1,32 @@
 .header {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  grid-template-areas: "title logged_in_user";
+  align-items: center;
   color: whitesmoke;
   background-color: darkslategrey;
   border-bottom: 10px solid whitesmoke;
-  vertical-align: center;
+  padding-left: 1%;
+  padding-right: 1%;
 }
+
+.title {
+  grid-area: title;
+  justify-self: left;
+  text-align: left;
+}
+
+.logged_in_user {
+  background-color: slategrey;
+  padding: 5%;
+  grid-area: logged_in_user;
+  justify-self: right;
+  text-align: right;
+}
+
+/* @media screen and (max-width: 750px) {
+  .header {
+    display: block;
+    text-justify: center;
+  }
+} */

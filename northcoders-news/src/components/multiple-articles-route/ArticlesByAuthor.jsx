@@ -48,10 +48,10 @@ class ArticlesByAuthor extends Component {
 
   render() {
     const { queries, count } = this.state;
-    const { username } = this.props;
+    const { username, loggedInUser } = this.props;
     return (
       <section>
-        <h2>Articles by {`${username}`}</h2>
+        <h2>Articles by {username === loggedInUser ? "me" : username}</h2>
         <section className="FlexRow">
           <section className="FlexColumn">
             <Queries

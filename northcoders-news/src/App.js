@@ -23,7 +23,10 @@ class App extends Component {
           <Home path="/" />
           <AllArticles path="/articles" />
           <ArticlesByTopic path="/articles/topics/:slug" />
-          <ArticlesByAuthor path="/articles/users/:username" />
+          <ArticlesByAuthor
+            path="/articles/users/:username"
+            loggedInUser={loggedInUser}
+          />
           <SingleArticle
             path="/articles/:article_id/*"
             loggedInUser={loggedInUser}
