@@ -1,0 +1,81 @@
+# Checklist for Northcoders News Front End
+
+- **Un-nest your project from the nested northcoders-news folder inside the repo**
+
+## README - write your own and make sure that it:
+
+- [ ] has a link to the deployed version
+- [ ] provides general info about your app
+- [ ] includes links to your back end repo
+- [ ] specifies the minimum version of Node required to run locally (check your Node version, `node --version` and use the major version that you are on)
+- [ ] has clear instructions on how to run your project locally (`git clone <repo-url>, cd ...`)
+
+## UX
+
+- [ ] Basic styling added **TO-DO!**
+- [ ] Responsive design **Consider this whilst adding your styling**
+- [ ] Items aligned **Consider this whilst adding your styling**
+- [ ] Content legible (not too wide, obstructed, etc) **Consider this whilst adding your styling**
+- [yes] Refreshing doesn’t cause an issue on sub-pages
+- [ ] No errors in the console **Check this again when you are finished**
+- [yes] Votes / Posts / Deletions happen instantly _OR_ give user indication of loading
+
+## Functionality
+
+### Login
+
+- [ ] Some indication of who is logged in **In the header maybe?**
+
+### Articles
+
+- [yes] Serves all articles / top articles
+- [yes] Can vote on articles
+- [yes] Can vote a maximum of once in either direction per page load
+- [yes] Votes are persistent when page is refreshed
+- [yes] Topic pages load only relevant articles (especially when navigating from one topic page to another)
+- [yes] Can sort articles by date created / comment_count / votes
+- [yes] navigate over pages of articles (if implemented in back-end)
+- [yes] filter / display articles by specific user
+
+### Individual Article / Comments
+
+- [yes] Individual articles are served with comments **but it would be nice if when I refreshed, I could still see the comments, maybe by making `show comments` take me to an embedded route, e.g. `/articles/33/comments` which displays the comments**
+- [yes] Can vote on comments
+- [yes] Can vote a maximum of once in either direction per page load
+- [yes] Votes are persistent when page is refreshed
+- [yes] Can post new comments, which are persistent
+- [yes] Can only delete comments of logged in user
+- [yes] Deleted comments don’t re-appear on re-render/refresh
+- [yes] navigate over pages of comments (if implemented in back-end)
+
+## Error Handling
+
+**(remember to style your error component as well)**
+
+- [yes] Bad url
+- [yes] Bad topic slug in url **BUT need to not show the article sorting drop downs**
+- [yes] Bad article id in url **BUT need to not show the comments button in this case**
+- [yes] Bad username in url **BUT need to not show the article sorting drop downs**
+- [ ] Post comment: (No text in comment body / Can you post without logging in?) **make it a required input box**
+
+## Code
+
+- [yes] Well named components
+- [yes] Functional components used where possible
+- [yes] `node_modules` git ignored
+- [ ] remove unnecessary files (e.g. App.test.js)
+- [yes] Components reused where possible (`Articles` / `Voter`...)
+- [yes] Functions are DRY (`handleChange` for controlled components / api calls)
+- [yes] Use object destructuring where possible
+- [ ] No `console.log`s / comments **double check before your final commit**
+
+## MAKE SURE ALL TESTS ARE STILL PASSING IN BACK END
+
+## Once everything else is complete, here are some extra challenges:
+
+- [ ] post new article
+- [ ] delete logged in user's articles
+- [ ] Use `aXe` extension to check for a11y issues
+- [ ] Make sure any pure functions are extracted and tested with `Jest`
+- [ ] Add integration tests with `cypress`
+- [ ] Use Context API for sharing logged in user amongst components
