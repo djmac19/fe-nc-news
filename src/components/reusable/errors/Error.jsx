@@ -2,9 +2,9 @@ import React from "react";
 
 function Error({ status, msg }) {
   return (
-    <p>
+    <h2>
       {status}: {msg}
-    </p>
+    </h2>
   );
 }
 

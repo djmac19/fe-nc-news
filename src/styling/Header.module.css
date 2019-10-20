@@ -1,32 +1,27 @@
 .header {
-  display: grid;
-  grid-template-columns: 9fr 1fr;
-  grid-template-areas: "title logged_in_user";
   align-items: center;
   color: whitesmoke;
   background-color: darkslategrey;
-  border-bottom: 10px solid whitesmoke;
-  padding-left: 1%;
-  padding-right: 1%;
+  border-bottom: 5px solid whitesmoke;
+  padding: 0% 1% 0% 1%;
 }
 
 .title {
-  grid-area: title;
   justify-self: left;
   text-align: left;
+  text-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .logged_in_user {
-  background-color: slategrey;
-  padding: 5%;
-  grid-area: logged_in_user;
+  align-self: top;
   justify-self: right;
   text-align: right;
+  margin: 0%;
 }
 
-/* @media screen and (max-width: 750px) {
+@media screen and (max-width: 414px) {
   .header {
     display: block;
     text-justify: center;
   }
-} */
+}

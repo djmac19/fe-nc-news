@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../../utils/api";
 import Comment from "./Comment";
-import AddComment from "./AddComment";
+import PostComment from "./PostComment";
 import Error from "../reusable/errors/Error";
 
 class CommentsList extends Component {
@@ -91,7 +91,7 @@ class CommentsList extends Component {
       <p>loading...</p>
     ) : (
       <section>
-        <AddComment
+        <PostComment
           article_id={article_id}
           loggedInUser={loggedInUser}
           addComment={this.addComment}

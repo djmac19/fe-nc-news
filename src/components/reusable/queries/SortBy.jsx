@@ -10,8 +10,12 @@ function SortBy({ updateQueries, columns }) {
     <form>
       <h4>Sort By:</h4>
       <select onClick={handleClick}>
-        {columnsEntries.map(column => {
-          return <option value={column[0]}>{column[1]}</option>;
+        {columnsEntries.map((column, i) => {
+          return (
+            <option key={i} value={column[0]}>
+              {column[1]}
+            </option>
+          );
         })}
       </select>
     </form>

@@ -9,12 +9,13 @@ class Article extends Component {
   state = { article: null, isLoading: true, error: null };
 
   componentDidMount() {
-    const { article_id, updateCount } = this.props;
+    const { article_id, updateCount, updateError } = this.props;
     api
       .getArticle(article_id)
       .then(({ article }) => {
         this.setState({ article, isLoading: false, error: null });
         updateCount(article.comment_count);
+        updateError(false);
       })
       .catch(error => {
         this.setState({
@@ -23,6 +24,7 @@ class Article extends Component {
             status: error.response.status
           }
         });
+        updateError(true);
       });
   }
 
@@ -35,7 +37,6 @@ class Article extends Component {
     };
     const { article, isLoading, error } = this.state;
     const { loggedInUser } = this.props;
-    // const date = new Date(article.created_at);
     return error ? (
       <Error {...error} />
     ) : isLoading ? (

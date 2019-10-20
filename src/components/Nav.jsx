@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import * as api from "../utils/api";
 import { Link } from "@reach/router";
+import * as api from "../utils/api";
 import styles from "../styling/Nav.module.css";
 import Error from "./reusable/errors/Error";
 

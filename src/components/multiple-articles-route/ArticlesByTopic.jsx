@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../index.css";
+import styles from "../../styling/FilteredItems.module.css";
 import Queries from "../reusable/queries/Queries";
 import ArticlesList from "../reusable/ArticlesList";
 import Page from "../reusable/queries/Page";
@@ -14,7 +14,8 @@ class ArticlesByTopic extends Component {
       limit: 10,
       p: 1
     },
-    count: null
+    count: null,
+    error: true
   };
 
   updateQueries = (key, value) => {
@@ -25,6 +26,10 @@ class ArticlesByTopic extends Component {
 
   updateCount = count => {
     this.setState({ count });
+  };
+
+  updateError = boolean => {
+    this.setState({ error: boolean });
   };
 
   changePage = direction => {
@@ -45,33 +50,44 @@ class ArticlesByTopic extends Component {
   }
 
   render() {
-    const { queries, count } = this.state;
+    const { queries, count, error } = this.state;
     const { slug } = this.props;
     return (
       <section>
-        <h2>Articles about {`${slug.toUpperCase()}`}</h2>
-        <section className="FlexRow">
-          <section className="FlexColumn">
-            <Queries
-              updateQueries={this.updateQueries}
-              columns={{
-                created_at: "Date Created",
-                comment_count: "Comments",
-                votes: "Votes"
-              }}
+        {!error && (
+          <h2 className={styles.title}>
+            Articles on {`${slug.toUpperCase()}`}
+          </h2>
+        )}
+        <div className={styles.filtered_items}>
+          {!error && (
+            <div className={styles.sidebar}>
+              <Queries
+                updateQueries={this.updateQueries}
+                columns={{
+                  created_at: "Date Created",
+                  comment_count: "Comments",
+                  votes: "Votes"
+                }}
+                count={count}
+              />
+              <h4 className={styles.title}>Total: {this.state.count}</h4>
+            </div>
+          )}
+          <div className={styles.items_list}>
+            <ArticlesList
+              {...queries}
+              updateCount={this.updateCount}
+              updateError={this.updateError}
             />
-            <h4>Total: {this.state.count}</h4>
-          </section>
-          <section>
-            <ArticlesList {...queries} updateCount={this.updateCount} />
             <Page
               limit={queries.limit}
               p={queries.p}
               count={count}
               changePage={this.changePage}
             />
-          </section>
-        </section>
+          </div>
+        </div>
       </section>
     );
   }

@@ -1,8 +1,8 @@
 .article {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 7fr 2fr 2fr auto 3fr;
-  grid-template-areas: "image image" "title title" "author created_at" "body body" "votes comments";
+  grid-template-rows: auto auto auto auto auto;
+  grid-template-areas: "image image" "title title" "author created_at" "body body" "comments votes";
   background-color: whitesmoke;
   box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
   margin: 3%;
@@ -13,17 +13,16 @@
 
 .image {
   grid-area: image;
-  max-width: 450px;
+  max-width: 50%;
 }
 
-@media screen and (max-width: 704px) {
+@media screen and (max-width: 414px) {
   .article {
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
 
   .image {
-    max-width: 250px;
+    max-width: 275px;
   }
 }
 

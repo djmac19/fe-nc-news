@@ -1,0 +1,27 @@
+.filtered_items {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: "sidebar items_list" ". items_list";
+  margin: 3%;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: rgba(245, 245, 245, 0.5);
+}
+
+@media screen and (max-width: 767px) {
+  .filtered_items {
+    display: inline;
+    margin: 0%;
+  }
+}
+
+.title {
+  margin-bottom: 0%;
+}
+
+.items_list {
+  grid-area: items_list;
+}

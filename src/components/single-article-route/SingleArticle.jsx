@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Router } from "@reach/router";
+import styles from "../../styling/FilteredItems.module.css";
 import Article from "./Article";
 import ViewToggler from "../reusable/ViewToggler";
 import Queries from "../reusable/queries/Queries";
@@ -9,7 +9,8 @@ import Page from "../reusable/queries/Page";
 class SingleArticle extends Component {
   state = {
     queries: { sort_by: "created_at", order: "desc", limit: 10, p: 1 },
-    count: 0
+    count: 0,
+    error: true
   };
 
   updateQueries = (key, value) => {
@@ -32,8 +33,12 @@ class SingleArticle extends Component {
     });
   };
 
+  updateError = boolean => {
+    this.setState({ error: boolean });
+  };
+
   render() {
-    const { queries, count } = this.state;
+    const { queries, count, error } = this.state;
     const { article_id, loggedInUser } = this.props;
     return (
       <section>
@@ -41,35 +46,37 @@ class SingleArticle extends Component {
           article_id={article_id}
           loggedInUser={loggedInUser}
           updateCount={this.updateCount}
+          updateError={this.updateError}
         />
-        <ViewToggler article_id={article_id}>
-          {/* <Router path="/comments"> */}
-          <section className="FlexRow">
-            <section className="FlexColumn">
-              <Queries
-                updateQueries={this.updateQueries}
-                columns={{ created_at: "Date Created", votes: "Votes" }}
-              />
-              <h4>Total: {count}</h4>
-            </section>
-            <section className="FlexColumn">
-              <CommentsList
-                {...queries}
-                article_id={article_id}
-                loggedInUser={loggedInUser}
-                updateCount={this.updateCount}
-                changePage={this.changePage}
-              />
-              <Page
-                limit={queries.limit}
-                p={queries.p}
-                count={count}
-                changePage={this.changePage}
-              />
-            </section>
-          </section>
-          {/* </Router> */}
-        </ViewToggler>
+        {!error && (
+          <ViewToggler article_id={article_id}>
+            <div className={styles.filtered_items}>
+              <div className={styles.sidebar}>
+                <Queries
+                  updateQueries={this.updateQueries}
+                  columns={{ created_at: "Date Created", votes: "Votes" }}
+                  count={count}
+                />
+                <h4 className={styles.total}>Total: {count}</h4>
+              </div>
+              <div className={styles.items_list}>
+                <CommentsList
+                  {...queries}
+                  article_id={article_id}
+                  loggedInUser={loggedInUser}
+                  updateCount={this.updateCount}
+                  changePage={this.changePage}
+                />
+                <Page
+                  limit={queries.limit}
+                  p={queries.p}
+                  count={count}
+                  changePage={this.changePage}
+                />
+              </div>
+            </div>
+          </ViewToggler>
+        )}
       </section>
     );
   }

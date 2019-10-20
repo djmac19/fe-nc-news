@@ -1,9 +1,9 @@
 .article_card {
   display: grid;
   grid-template-columns: 4fr 3fr 3fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
   grid-template-areas: "image title title" "image author votes" "image created_at comments";
-  justify-items: center;
+  grid-column-gap: 3%;
   align-items: center;
   background-color: whitesmoke;
   box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
@@ -13,22 +13,15 @@
 
 .image {
   grid-area: image;
-  max-width: 90%;
-  justify-self: left;
+  max-width: 100%;
 }
 
-@media screen and (max-width: 704px) {
+@media screen and (max-width: 767px) {
   .article_card {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas: "image image" "title title" "author votes" "created_at comments";
-  }
-
-  .image {
-    grid-area: image;
-    max-width: 250px;
-    justify-self: center;
   }
 }
 

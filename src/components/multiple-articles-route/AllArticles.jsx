@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../index.css";
+import styles from "../../styling/FilteredItems.module.css";
 import Queries from "../reusable/queries/Queries";
 import ArticlesList from "../reusable/ArticlesList";
 import Page from "../reusable/queries/Page";
@@ -14,7 +14,8 @@ class AllArticles extends Component {
       limit: 10,
       p: 1
     },
-    count: null
+    count: null,
+    error: true
   };
 
   updateQueries = (key, value) => {
@@ -38,8 +39,8 @@ class AllArticles extends Component {
   render() {
     const { queries, count } = this.state;
     return (
-      <section className="FlexRow">
-        <div className="FlexColumn">
+      <section className={styles.filtered_items}>
+        <div className={styles.sidebar}>
           <Queries
             updateQueries={this.updateQueries}
             columns={{
@@ -47,10 +48,11 @@ class AllArticles extends Component {
               comment_count: "Comments",
               votes: "Votes"
             }}
+            count={count}
           />
-          <h4>Total: {this.state.count}</h4>
+          <h4 className={styles.title}>Total: {this.state.count}</h4>
         </div>
-        <div className="FlexColumn">
+        <div className={styles.items_list}>
           <ArticlesList {...queries} updateCount={this.updateCount} />
           <Page
             limit={queries.limit}

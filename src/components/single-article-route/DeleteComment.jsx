@@ -15,7 +15,9 @@ function DeleteComment({
   };
 
   return (
-    author === loggedInUser && <button onClick={handleClick}>Delete</button>
+    author === loggedInUser && (
+      <button onClick={handleClick}>Delete My Comment</button>
+    )
   );
 }
 

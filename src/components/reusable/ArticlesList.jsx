@@ -12,20 +12,29 @@ class ArticlesList extends Component {
   };
 
   componentDidMount() {
-    const { sort_by, order, author, topic, limit, p, updateCount } = this.props;
+    const {
+      sort_by,
+      order,
+      author,
+      topic,
+      limit,
+      p,
+      updateCount,
+      updateError
+    } = this.props;
     api
       .getArticles(sort_by, order, author, topic, limit, p)
       .then(({ articles, total_count }) => {
         this.setState({ articles, total_count, isLoading: false, error: null });
-        if (updateCount) {
-          updateCount(total_count);
-        }
+        updateError && updateError(false);
+        updateCount && updateCount(total_count);
       })
-      .catch(error =>
+      .catch(error => {
         this.setState({
           error: { msg: error.response.data.msg, status: error.response.status }
-        })
-      );
+        });
+        updateError && updateError(true);
+      });
   }
 
   componentDidUpdate(prevProps) {

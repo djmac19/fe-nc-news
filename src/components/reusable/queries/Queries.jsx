@@ -1,16 +1,16 @@
 import React from "react";
-import "../../../index.css";
+import styles from "../../../styling/Queries.module.css";
 import SortBy from "./SortBy";
 import Order from "./Order";
 import Limit from "./Limit";
 
-function Queries({ updateQueries, columns }) {
+function Queries({ updateQueries, columns, count }) {
   return (
-    <section className="FlexColumn">
+    <div className={styles.queries}>
       <SortBy updateQueries={updateQueries} columns={columns} />
       <Order updateQueries={updateQueries} />
-      <Limit updateQueries={updateQueries} />
-    </section>
+      <Limit count={count} updateQueries={updateQueries} />
+    </div>
   );
 }
 

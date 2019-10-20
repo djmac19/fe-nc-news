@@ -5,11 +5,13 @@ import styles from "../styling/Header.module.css";
 function Header({ loggedInUser }) {
   return (
     <div className={styles.header}>
-      <h1 className={styles.title}>Northcoders News</h1>
-      <h5 className={styles.logged_in_user}>
+      <p className={styles.logged_in_user}>
         Logged in as:{" "}
-        <Link to={`/articles/users/${loggedInUser}`}>{loggedInUser}</Link>
-      </h5>
+        <strong>
+          <Link to={`/articles/users/${loggedInUser}`}>{loggedInUser}</Link>
+        </strong>
+      </p>
+      <h1 className={styles.title}>Northcoders News</h1>
     </div>
   );
 }
