@@ -1,15 +1,15 @@
 import React from "react";
 
 function Page({ limit, p, count, changePage }) {
-  const handleClick = direction => {
+  const handlePress = direction => {
     changePage(direction);
   };
   return (
     count > limit && (
       <section>
         <button
-          onClick={() => {
-            handleClick(-1);
+          onPress={() => {
+            handlePress(-1);
           }}
           disabled={p === 1}
         >
@@ -17,8 +17,8 @@ function Page({ limit, p, count, changePage }) {
         </button>{" "}
         Page: {p}{" "}
         <button
-          onClick={() => {
-            handleClick(1);
+          onPress={() => {
+            handlePress(1);
           }}
           disabled={count <= limit * p}
         >

@@ -1,14 +1,14 @@
 import React from "react";
 
 function Limit({ count, updateQueries }) {
-  const handleClick = event => {
+  const handleChange = event => {
     const { value } = event.target;
     updateQueries("limit", value);
   };
   return (
     <form>
       <h4>Per Page:</h4>
-      <select onClick={handleClick}>
+      <select onChange={handleChange}>
         <option value="10">10</option>
         {count > 10 && <option value="20">20</option>}
         {count > 20 && <option value="30">30</option>}

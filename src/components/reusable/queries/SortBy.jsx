@@ -1,7 +1,7 @@
 import React from "react";
 
 function SortBy({ updateQueries, columns }) {
-  const handleClick = event => {
+  const handleChange = event => {
     const { value } = event.target;
     updateQueries("sort_by", value);
   };
@@ -9,7 +9,7 @@ function SortBy({ updateQueries, columns }) {
   return (
     <form>
       <h4>Sort By:</h4>
-      <select onClick={handleClick}>
+      <select onChange={handleChange}>
         {columnsEntries.map((column, i) => {
           return (
             <option key={i} value={column[0]}>
