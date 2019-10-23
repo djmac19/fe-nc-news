@@ -18,7 +18,7 @@ function Comment({
   return (
     <section className={styles.comment}>
       <h3 className={styles.author}>
-        <Link to="/articles/users/:username">{author}</Link>
+        <Link to={`/articles/users/${author}`}>{author}</Link>
       </h3>
       <p className={styles.created_at}>
         Date Created: <br /> {date.toString().slice(0, 24)}
