@@ -19,6 +19,10 @@
   margin: 0%;
 }
 
+.span {
+  background-color: rgba(245, 245, 245, 0.5);
+}
+
 @media screen and (max-width: 414px) {
   .header {
     display: block;

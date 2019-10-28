@@ -28,7 +28,7 @@ class App extends Component {
             loggedInUser={loggedInUser}
           />
           <SingleArticle
-            path="/articles/:article_id/*"
+            path="/articles/:article_id"
             loggedInUser={loggedInUser}
           />
           <NotFound default />
